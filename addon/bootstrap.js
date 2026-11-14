@@ -3,7 +3,8 @@
 // 流程：
 //   1. dictlookup 取苹果词典原文（毫秒级），拆成词头 / 音标 / 简明释义
 //   2. 先渲染精简版（音标 + 中文义项），不阻塞
-//   3. 后台调 dictsummary（Foundation Models 端侧模型）压成一两行中文，命中缓存则直接显示
+//   3. 后台调 dictsummary（Apple Foundation Models 端侧模型）压成 2–3 条精简英文义项；
+//      模型不可用时保留第 2 步的解析结果，版式不变
 //
 // 词典与模型都在本机，不联网。
 
@@ -12,7 +13,7 @@
 var PLUGIN_ID = "sysdict-lookup@mingpei.local";
 var PREFIX = "extensions.zotero.sysdict.";
 var registered = false;
-var helperB64 = null;
+var helperB64 = { dictlookup: null, dictsummary: null };
 
 /* ---------------- 基础工具 ---------------- */
 
@@ -50,15 +51,15 @@ function pref(key, fallback) {
 
 
 // 首次运行把内置的通用二进制助手释放到 Application Support
-function ensureHelper(version) {
+function releaseBinary(name, version) {
     var dir = baseDir();
     dir.append("bin");
     if (!dir.exists()) dir.create(Components.interfaces.nsIFile.DIRECTORY_TYPE, 0o755);
 
     var exe = dir.clone();
-    exe.append("dictlookup");
+    exe.append(name);
     var marker = dir.clone();
-    marker.append(".dictlookup.version");
+    marker.append("." + name + ".version");
 
     try {
         if (exe.exists() && marker.exists() &&
@@ -67,10 +68,11 @@ function ensureHelper(version) {
         }
     } catch (e) {}
 
-    if (!helperB64) return exe;
+    var b64 = helperB64[name];
+    if (!b64) return exe;
 
     try {
-        var binary = atob(helperB64);
+        var binary = atob(b64);
         var out = Components.classes["@mozilla.org/network/file-output-stream;1"]
             .createInstance(Components.interfaces.nsIFileOutputStream);
         out.init(exe, 0x02 | 0x08 | 0x20, 0o755, 0);
@@ -78,9 +80,9 @@ function ensureHelper(version) {
         out.close();
         exe.permissions = 0o755;
         Zotero.File.putContents(marker, version);
-        log("已释放内置词典助手 -> " + exe.path);
+        log("已释放内置助手 " + name);
     } catch (e) {
-        log("释放词典助手失败：" + e);
+        log("释放 " + name + " 失败：" + e);
     }
     return exe;
 }
@@ -310,12 +312,38 @@ function renderCompact(doc, body, word, data) {
     if (data.completedFrom) {
         body.appendChild(el(doc, "div", "sysdict-hint", "选区「" + data.completedFrom + "」"));
     }
+
+    return { list: list, englishRaw: entry.text || "" };
+}
+
+// 模型结果：分号分隔的短义项，替换掉解析出来的那几条
+function applySenses(doc, listEl, text) {
+    var parts = String(text || "").split(/;\s*/).map(function (s) { return s.trim(); }).filter(Boolean);
+    if (!parts.length) return;
+    listEl.textContent = "";
+    parts.slice(0, 3).forEach(function (sense) {
+        listEl.appendChild(el(doc, "div", "sysdict-sense", sense));
+    });
 }
 
 function fillPanel(doc, body, word) {
     body.textContent = "查询中…";
     return runHelper(word).then(function (data) {
-        renderCompact(doc, body, word, data);
+        var ui = renderCompact(doc, body, word, data);
+        if (!ui || !ui.englishRaw) return;
+
+        var cached = readCachedSummary(word);
+        if (cached) {
+            applySenses(doc, ui.list, cached);
+            return;
+        }
+
+        // 端侧模型精简；失败或不可用时保持解析结果
+        return summarize(word, ui.englishRaw).then(function (summary) {
+            if (!summary) return;
+            writeCachedSummary(word, summary, ui.englishRaw);
+            applySenses(doc, ui.list, summary);
+        });
     }).catch(function (e) {
         body.textContent = "查词失败：" + (e && e.message ? e.message : e);
         log("查询失败：" + e);
@@ -392,14 +420,16 @@ function uninstall(data, reason) {}
 async function startup({ id, version, rootURI }, reason) {
     try {
         if (Zotero.initializationPromise) await Zotero.initializationPromise;
-        try {
-            var scope = {};
-            Services.scriptloader.loadSubScript(rootURI + "native/dictlookup.b64.js", scope);
-            helperB64 = scope.SYSDICT_B64 || null;
-        } catch (e) {
-            log("加载内置助手模块失败：" + e);
-        }
-        ensureHelper(version);
+        ["dictlookup", "dictsummary"].forEach(function (name) {
+            try {
+                var scope = {};
+                Services.scriptloader.loadSubScript(rootURI + "native/" + name + ".b64.js", scope);
+                helperB64[name] = scope["SYSDICT_" + name.toUpperCase() + "_B64"] || null;
+            } catch (e) {
+                log("加载内置模块 " + name + " 失败：" + e);
+            }
+            releaseBinary(name, version);
+        });
         register();
         log("startup v" + version);
     } catch (e) {

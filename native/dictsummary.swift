@@ -60,20 +60,22 @@ struct Main {
         }
 
         let instructions = """
-        你是一个英汉词典编辑。用户给你一个英文单词和它的词典原文，你只输出这个词最核心的中文释义。
-        规则：
-        - 最多两个义项，用 ①② 编号，没有第二义项就只给一个
-        - 每个义项不超过 12 个汉字，只写词义，不写例句、词源、词性缩写、音标
-        - 不要任何解释、前缀、换行或标点装饰
-        例：① 巨大的 ② 规模惊人的
+        You are a dictionary editor. Given an English word and its dictionary entry, output its most useful senses for a reader.
+        Rules:
+        - At most three senses, separated by "; "
+        - Each sense a short English phrase, no examples, no etymology, no part-of-speech labels, no phonetics, no numbering
+        - Do not add any preamble, explanation, or line breaks
+        Example: extremely large; (of a statue) at least twice life size
         """
 
         let session = LanguageModelSession(instructions: instructions)
-        let prompt = "单词：\(word)\n词典原文：\(raw.isEmpty ? "（无）" : raw)"
+        let prompt = "Word: \(word)\nDictionary entry: \(raw.isEmpty ? "(none)" : raw)"
 
         do {
             let response = try await session.respond(to: prompt)
-            let summary = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
+            let summary = response.content
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .replacingOccurrences(of: "\n", with: " ")
             emit(Output(available: true, summary: summary, reason: nil))
         } catch {
             emit(Output(available: false, summary: nil, reason: "\(error)"))

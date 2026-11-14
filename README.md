@@ -8,6 +8,7 @@ no examples, no etymologies, no clutter.
 - **Instant** — milliseconds, no network round trip
 - **Terse** — headword, pronunciation, and the first two or three senses only
 - **Native** — lives inside Zotero's own selection popup, no extra window
+- **On-device condensation** — Apple Foundation Models rewrites the entry into two or three short senses; if Apple Intelligence is unavailable the parsed entry is shown unchanged
 
 ![screenshot](docs/screenshot.png)
 
@@ -63,6 +64,17 @@ Requires Xcode Command Line Tools:
 Output: `build/sysdict-lookup.xpi`. The script compiles `native/dictlookup.m` for
 arm64 and x86_64, embeds it as base64 in `addon/native/dictlookup.b64.js`, and
 packages the XPI.
+
+## Apple Foundation Models
+
+After the dictionary lookup returns, the plugin asks the **on-device model** (the
+`FoundationModels` framework, macOS 26+ with Apple Intelligence enabled) to condense
+the entry into at most three short English senses. Results are cached per word, so a
+word is only summarised once.
+
+If the model is unavailable or the call fails, the deterministically parsed senses
+are shown instead — same layout, no second view, no error message. Nothing leaves
+the machine in either path.
 
 ## Limitations
 
