@@ -1,0 +1,3 @@
+build/
+.DS_Store
+addon/native/dictlookup.b64.js

@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "System Dictionary Lookup",
+  "version": "0.3.0",
+  "description": "在 Zotero 划词弹窗里直接显示 macOS 系统词典（New Oxford American Dictionary / 牛津英汉汉英词典）的释义，离线、不联网。",
+  "homepage_url": "https://github.com/PeberWang",
+  "author": "Wang Mingpei",
+  "icons": {
+    "48": "content/icons/icon@0.5x.png",
+    "96": "content/icons/icon.png"
+  },
+  "applications": {
+    "zotero": {
+      "id": "sysdict-lookup@mingpei.local",
+      "update_url": "https://example.com/sysdict/updates.json",
+      "strict_min_version": "7.0",
+      "strict_max_version": "10.9.9"
+    }
+  }
+}
