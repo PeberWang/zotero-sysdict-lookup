@@ -1,72 +1,86 @@
 # Zotero System Dictionary
 
-在 Zotero 内置 PDF 阅读器里划一个英文单词，划词弹窗直接给出**音标 + 两三条简明英英释义**，
-词条来自 macOS 自带词典（New Oxford American Dictionary / Oxford Dictionary of English）。
+Look up English words from macOS's built-in dictionaries without leaving Zotero's PDF reader.
+Select a word and the selection popup shows **IPA + two or three concise English senses** —
+no examples, no etymologies, no clutter.
 
-- **离线**：调用 macOS 的 DictionaryServices，不联网、不传词
-- **即时**：本地查询，毫秒级
-- **干净**：只保留音标和核心义项，自动剥掉例句、词源、派生词
-- **不打扰**：不弹独立窗口，直接长在 Zotero 自己的划词弹窗里
+- **Offline** — queries macOS DictionaryServices locally; nothing is sent anywhere
+- **Instant** — milliseconds, no network round trip
+- **Terse** — headword, pronunciation, and the first two or three senses only
+- **Native** — lives inside Zotero's own selection popup, no extra window
 
-## 安装
+![screenshot](docs/screenshot.png)
 
-1. 从 [Releases](https://github.com/PeberWang/zotero-sysdict-lookup/releases) 下载 `sysdict-lookup.xpi`
-2. Zotero → 工具 → 插件 → 齿轮 → 从文件安装插件
-3. 打开任意 PDF，选中英文单词
+## Install
 
-首次启动时，插件会把内置的词典助手（通用二进制，arm64 + x86_64）释放到
-`~/Library/Application Support/Zotero/sysdict/bin/`。
+1. Download `sysdict-lookup.xpi` from [Releases](https://github.com/PeberWang/zotero-sysdict-lookup/releases)
+2. Zotero → Tools → Plugins → gear → Install Plugin From File
+3. Open any PDF and select an English word
 
-**要求**：macOS（DictionaryServices）、Zotero 7 及以上。系统里需要有牛津词典
-（macOS 默认自带；系统设置 → 通用 → 词典 里确认已勾选）。
+On first launch the plugin extracts its bundled dictionary helper (a universal
+arm64 + x86_64 binary) to `~/Library/Application Support/Zotero/sysdict/bin/`.
 
-## 设置
+**Requirements**: macOS (DictionaryServices), Zotero 7 or later. The New Oxford
+American Dictionary must be enabled in System Settings → General → Dictionary
+(it is by default on macOS).
 
-`about:config` 里以 `extensions.zotero.sysdict.` 开头：
+## Preferences
 
-| 键 | 默认 | 说明 |
+Under `extensions.zotero.sysdict.` in the config editor:
+
+| Key | Default | Description |
 | --- | --- | --- |
-| `autoLookup` | `true` | 划词后自动查询；设为 `false` 则显示「查系统词典」按钮 |
-| `maxWords` | `3` | 最多查几个词，超过就不触发 |
-| `order` | 空 | 自定义词典顺序，用 `\|` 分隔，如 `New Oxford American Dictionary\|牛津英汉汉英词典` |
+| `autoLookup` | `true` | Look up as soon as text is selected; set `false` to show a button instead |
+| `maxWords` | `3` | Maximum number of words in a selection |
+| `order` | empty | Custom dictionary order, `\|`-separated, e.g. `New Oxford American Dictionary\|牛津英汉汉英词典` |
 
-## 工作原理
+## How it works
 
 ```
-Zotero 阅读器划词
-   ↓ renderTextSelectionPopup 事件
-bootstrap.js 取选区文本（getSelection 优先，annotation.text 兜底）
+selection in the reader
+   ↓ renderTextSelectionPopup
+bootstrap.js takes the selection text (getSelection first, annotation.text as fallback)
    ↓
-dictlookup（内置通用二进制，调用 DictionaryServices）
+dictlookup — bundled universal binary calling DictionaryServices
    ↓
-拆出词头 / 音标 / 前三条义项
+headword / IPA / first three senses
    ↓
-渲染进 Zotero 的划词弹窗
+rendered into Zotero's selection popup
 ```
 
-PDF 划词偶尔会少选最后一个字母（`colossa` 而不是 `colossal`），`dictlookup` 会在查不到时
-尝试补一个字母，唯一命中才采用。
+PDF selections occasionally miss the last letter (`colossa` instead of `colossal`).
+When a lookup fails, `dictlookup` tries completing one trailing letter and only
+accepts an unambiguous match.
 
-## 从源码构建
+## Build from source
 
-需要 Xcode Command Line Tools：
+Requires Xcode Command Line Tools:
 
 ```sh
 ./build.sh
 ```
 
-产物：`build/sysdict-lookup.xpi`。构建脚本会：
+Output: `build/sysdict-lookup.xpi`. The script compiles `native/dictlookup.m` for
+arm64 and x86_64, embeds it as base64 in `addon/native/dictlookup.b64.js`, and
+packages the XPI.
 
-1. 编译 `native/dictlookup.m`（arm64 + x86_64 通用二进制）
-2. 把它转成 base64 写进 `addon/native/dictlookup.b64.js`
-3. 打包 xpi
+## Limitations
 
-## 已知限制
+- macOS only (DictionaryServices)
+- Scanned PDFs need OCR first
+- Triggers on English words and short phrases only
 
-- 仅 macOS：依赖 DictionaryServices
-- 扫描版 PDF 需要先 OCR，否则没有文字层
-- 只对英文单词/短语触发（最多 `maxWords` 个词）
-
-## 许可
+## License
 
 MIT
+
+---
+
+## 中文说明
+
+在 Zotero 内置 PDF 阅读器里划中英文单词，划词弹窗直接给出**音标 + 两三条简明英英释义**，
+词条来自 macOS 自带的 New Oxford American Dictionary，离线、毫秒级；例句、词源、派生词自动剥离。
+另有「词典 App」按钮可跳转系统词典。
+
+安装：从 [Releases](https://github.com/PeberWang/zotero-sysdict-lookup/releases) 下载
+`sysdict-lookup.xpi`，Zotero → 工具 → 插件 → 齿轮 → 从文件安装插件。仅支持 macOS。
