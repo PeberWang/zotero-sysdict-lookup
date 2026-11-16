@@ -1,3 +1,5 @@
+[![Listed in Zotero Chinese](https://zotero-chinese.com/badges/listed.svg)](https://zotero-chinese.com/plugins/)
+
 # Zotero System Dictionary
 
 Look up English words from macOS's built-in dictionaries without leaving Zotero's PDF reader.
