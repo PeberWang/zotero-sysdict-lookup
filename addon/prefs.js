@@ -1,0 +1,9 @@
+pref("extensions.zotero.sysdict.autoLookup", true);
+pref("extensions.zotero.sysdict.maxWords", 3);
+pref("extensions.zotero.sysdict.order", "");
+pref("extensions.zotero.sysdict.contextRank", true);
+pref("extensions.zotero.sysdict.targetLang", "auto");
+pref("extensions.zotero.sysdict.sameLanguageOnly", false);
+pref("extensions.zotero.sysdict.dictScope", "");
+pref("extensions.zotero.sysdict.fallback", false);
+pref("extensions.zotero.sysdict.rankMethod", "candidates");

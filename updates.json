@@ -1,0 +1,17 @@
+{
+  "addons": {
+    "sysdict-lookup@mingpei.local": {
+      "updates": [
+        {
+          "version": "0.4.0",
+          "update_link": "https://github.com/PeberWang/zotero-sysdict-lookup/releases/latest/download/sysdict-lookup.xpi",
+          "applications": {
+            "zotero": {
+              "strict_min_version": "7.0"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
