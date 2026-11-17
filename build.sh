@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 # 编译助手（通用二进制）→ base64 模块 → 打包 xpi
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -8,7 +8,7 @@ mkdir -p build "$DEST/bin" addon/native
 
 echo "==> 编译 dictlookup（arm64 + x86_64）"
 clang -O2 -fobjc-arc -arch arm64 -arch x86_64 \
-    -framework Foundation -framework CoreServices \
+    -framework Foundation -framework CoreServices -framework NaturalLanguage \
     -o build/dictlookup native/dictlookup.m
 lipo -info build/dictlookup | sed 's/^/    /'
 
@@ -21,7 +21,7 @@ lipo -info build/dictsummary | sed 's/^/    /'
 echo "==> 生成 base64 模块"
 for name in dictlookup dictsummary; do
     printf '// 由 build.sh 生成：macOS 通用二进制 %s 的 base64\nvar SYSDICT_%s_B64 = "%s";\n' \
-        "$name" "${name:u}" "$(base64 -i "build/$name" | tr -d '\n')" \
+        "$name" "$(echo "$name" | tr a-z A-Z)" "$(base64 -i "build/$name" | tr -d '\n')" \
         > "addon/native/$name.b64.js"
 done
 

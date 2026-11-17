@@ -1,0 +1,78 @@
+# 开发探针触发下载的 72 本词典（2026-11-16）
+
+开发初期的探针对未下载的词典调用了 `DCSCopyTextDefinition`，macOS 因此在后台把下面这些词典全部下载到了
+`/System/Library/AssetsV2/com_apple_MobileAsset_DictionaryServices_dictionary3macOS/`（系统 MobileAsset，受 SIP 保护）。
+原本已下载的 15 本不在此列。清理方法见 `OPENCLAW_HANDOFF.md` 最后一节。
+
+- Arkadaş Türkçe Sözlük
+- Diccionari Català-Anglès
+- Dicionário de Português licenciado para Oxford University Press
+- Dicţionarul explicativ al limbii române
+- Dizionario italiano da un affiliato di Oxford University Press
+- Duden-Wissensnetz deutsche Sprache
+- Engelsk Ordbok
+- Gran Diccionario Oxford - Español-Inglés • Inglés-Español
+- Hrvatski Enciklopedijski Rječnik
+- Kamus Dwibahasa Melayu/Inggeris - English/Malay Bilingual Dictionary, Oxford Fajar
+- Kamus Komprehensif Bahasa Melayu - Malay Monolingual Dictionary, Oxford Fajar
+- Larousse Editorial Diccionari Manual de la llengua catalana
+- Larousse Editorial Diccionario General de la Lengua Española
+- MOT sanakirja suomi-englanti, englanti-suomi
+- Magay Tamás szótár - Magyar-Angol • Angol-Magyar
+- Magyar értelmező szótár továbbfejlesztett adatbázis
+- Multidictionnaire de la langue française
+- NE Nationalencyklopedin AB Professional English-Swedish / Svensk-Engelska
+- NE Ordbok
+- Norsk Ordbok
+- Oxford Arabic Dictionary - عربي-إنجليزي • إنجليزي-عربي
+- Oxford Assamese Dictionaries - অসমীয়া-ইংৰাজী • ইংৰাজী-অসমীয়া
+- Oxford Bengali Dictionaries - বাংলা-ইংরেজি • ইংরেজি-বাংলা
+- Oxford German Dictionary
+- Oxford Gujarati Dictionaries - ગુજરાતી-અંગ્રેજી • અંગ્રેજી-ગુજરાતી
+- Oxford Hebrew Dictionary | מילון עברי-אנגלי דו-לשוני 
+- Oxford Hindi Dictionaries - हिन्दी-अंग्रेज़ी • अंग्रेज़ी-हिन्दी
+- Oxford Kannada Dictionaries - ಇಂಗ್ಲಿಷ್-ಕನ್ನಡ • ಕನ್ನಡ-ಇಂಗ್ಲಿಷ್
+- Oxford Malayalam Dictionaries - മലയാളം-ഇംഗ്ലീഷ് • ഇംഗ്ലീഷ്-മലയാളം
+- Oxford Marathi Dictionaries - इंग्रजी-मराठी • मराठी-इंग्रजी
+- Oxford Nepali Dictionaries - अङ्ग्रेजी-नेपाली • नेपाली-अङ्ग्रेजी
+- Oxford Odia Dictionaries - ଇଂରାଜୀ-ଓଡ଼ିଆ • ଓଡ଼ିଆ-ଇଂରାଜୀ
+- Oxford PWN Polish-English Dictionary / Wielki słownik polsko-angielski
+- Oxford Paravia Il Dizionario inglese - italiano/italiano - inglese
+- Oxford Portuguese Dictionary - Português-Inglês • Inglês-Português
+- Oxford Punjabi Dictionaries - ਪੰਜਾਬੀ ਅੰਗਰੇਜ਼ੀ ਕੋਸ਼ • پنجابی انگریزی لغت
+- Oxford Russian Dictionary - Русско-Английский • Англо-Русский
+- Oxford Sanskrit Dictionaries - आङ्ग्ल-संस्कृतम् • संस्कृतम्-आङ्ग्ल
+- Oxford Study Indonesian Dictionary - Inggris-Indonesia • Indonesia-Inggris
+- Oxford Tamil Dictionaries - தமிழ்-ஆங்கிலம் • ஆங்கிலம்-தமிழ்
+- Oxford Telugu Dictionaries - తెలుగు-ఇంగ్లీష్ • ఇంగ్లీష్-తెలుగు
+- Oxford Thesaurus of English
+- Oxford Turkish Dictionary - Türkçe-İngilizce • İngilizce-Türkçe
+- Oxford Urdu Dictionaries - اردو۔انگریزی • انگریزی-اردو
+- Oxford-Hachette French Dictionary
+- PONS Großwörterbuch Französisch Deutsch
+- Politikens Nudansk Ordbog
+- Praktický Anglicko-Chorvatský Slovník
+- Praktisk Engelsk-Dansk Ordbog
+- Prisma Handwoordenboek Engels
+- Prisma woordenboek Nederlands
+- Stavropoulos Oxford Greek-English Learners Dictionary
+- TTY Abbreviations Dictionary
+- Từ Điển Tiếng Việt
+- Từ điển Lạc Việt
+- Uniwersalny słownik języka polskiego
+- Velký anglicko-český a česko-anglický slovník
+- Veľký Anglicko-Slovenský Slovník
+- Λεξικό της κοινής νεοελληνικής
+- Оксфорд Қазақ Cөздігі
+- Толковый словарь русского языка
+- Тълковен речник на съвременния български език
+- Українсько-Англійський Словник
+- מילון אבן-שושן מחודש ומותאם לשנות האלפיים
+- राजपाल हिन्दी शब्दकोश
+- พจนานุกรมอังกฤษ-ไทย & ไทย-อังกฤษ ฉบับทันสมัยและสมบูรณ์ที่สุด
+- พจนานุกรมไทย ฉบับทันสมัยและสมบูรณ์
+- 뉴에이스 국어사전
+- 뉴에이스 영한사전 / 뉴에이스 한영사전
+- ウィズダム英和辞典 / ウィズダム和英辞典
+- スーパー大辞林
+- 超級クラウン中日辞典 / クラウン日中辞典

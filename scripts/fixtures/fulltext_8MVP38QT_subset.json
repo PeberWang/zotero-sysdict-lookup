@@ -1,0 +1,502 @@
+{
+ "source": "Zotero item 8MVP38QT (Conceptualizing Criminal Governance), full text via zotero_get_item_fulltext; 56,942 chars, 10 pages (\\f), 2,302 word forms. Kept: every token within completion range of each demo selection (including the selection itself), with per-page counts, so candidates, ranking and the in-text check reproduce exactly. OCR status of the PDF could not be confirmed.",
+ "pageCount": 10,
+ "demos": [
+  {
+   "full": "governance",
+   "sel": "governanc",
+   "pageIndex": 0
+  },
+  {
+   "full": "residents",
+   "sel": "resident",
+   "pageIndex": 0
+  },
+  {
+   "full": "cambridge",
+   "sel": "cambridg",
+   "pageIndex": 0
+  },
+  {
+   "full": "organizations",
+   "sel": "organization",
+   "pageIndex": 0
+  },
+  {
+   "full": "university",
+   "sel": "universi",
+   "pageIndex": 0
+  },
+  {
+   "full": "organized",
+   "sel": "organiz",
+   "pageIndex": 2
+  },
+  {
+   "full": "conceptualizing",
+   "sel": "conceptualizi",
+   "pageIndex": 0
+  },
+  {
+   "full": "charismatic",
+   "sel": "charismat",
+   "pageIndex": 0
+  },
+  {
+   "full": "scholarship",
+   "sel": "scholarsh",
+   "pageIndex": 0
+  },
+  {
+   "full": null,
+   "sel": "zqxwvutsr",
+   "pageIndex": null
+  }
+ ],
+ "tokens": {
+  "governance": {
+   "form": "governance",
+   "pages": [
+    [
+     0,
+     11
+    ],
+    [
+     1,
+     25
+    ],
+    [
+     2,
+     21
+    ],
+    [
+     3,
+     23
+    ],
+    [
+     4,
+     24
+    ],
+    [
+     5,
+     20
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     8,
+     17
+    ],
+    [
+     9,
+     2
+    ]
+   ]
+  },
+  "governing": {
+   "form": "governing",
+   "pages": [
+    [
+     0,
+     1
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     7,
+     2
+    ],
+    [
+     8,
+     2
+    ]
+   ]
+  },
+  "residents": {
+   "form": "residents",
+   "pages": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     4
+    ],
+    [
+     8,
+     1
+    ]
+   ]
+  },
+  "resident": {
+   "form": "resident",
+   "pages": [
+    [
+     7,
+     2
+    ]
+   ]
+  },
+  "cambridge": {
+   "form": "Cambridge",
+   "pages": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     9,
+     1
+    ]
+   ]
+  },
+  "organization": {
+   "form": "organization",
+   "pages": [
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     2
+    ],
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  "organizations": {
+   "form": "organizations",
+   "pages": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     1
+    ]
+   ]
+  },
+  "organizational": {
+   "form": "organizational",
+   "pages": [
+    [
+     4,
+     1
+    ],
+    [
+     8,
+     1
+    ]
+   ]
+  },
+  "university": {
+   "form": "University",
+   "pages": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     9,
+     1
+    ]
+   ]
+  },
+  "universe": {
+   "form": "universe",
+   "pages": [
+    [
+     5,
+     1
+    ]
+   ]
+  },
+  "universal": {
+   "form": "universal",
+   "pages": [
+    [
+     8,
+     1
+    ]
+   ]
+  },
+  "organizing": {
+   "form": "organizing",
+   "pages": [
+    [
+     0,
+     1
+    ]
+   ]
+  },
+  "organize": {
+   "form": "organize",
+   "pages": [
+    [
+     0,
+     1
+    ],
+    [
+     8,
+     1
+    ]
+   ]
+  },
+  "organiza": {
+   "form": "organiza",
+   "pages": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ]
+  },
+  "organized": {
+   "form": "organized",
+   "pages": [
+    [
+     2,
+     2
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     8,
+     2
+    ],
+    [
+     9,
+     1
+    ]
+   ]
+  },
+  "conceptualizing": {
+   "form": "Conceptualizing",
+   "pages": [
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     6,
+     1
+    ],
+    [
+     8,
+     1
+    ]
+   ]
+  },
+  "charismatic": {
+   "form": "charismatic",
+   "pages": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     8,
+     1
+    ],
+    [
+     9,
+     2
+    ]
+   ]
+  },
+  "scholarship": {
+   "form": "scholarship",
+   "pages": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  "scholar": {
+   "form": "scholar",
+   "pages": [
+    [
+     0,
+     1
+    ]
+   ]
+  },
+  "scholars": {
+   "form": "scholars",
+   "pages": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     7,
+     1
+    ]
+   ]
+  }
+ }
+}

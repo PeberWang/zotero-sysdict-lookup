@@ -1,0 +1,70 @@
+<vbox id="sysdict-prefpane" onload="SysDictPrefs.init()">
+	<groupbox>
+		<label><html:h2>解释语言</html:h2></label>
+		<hbox align="center">
+			<label value="用哪种语言解释：" control="sysdict-target"/>
+			<menulist id="sysdict-target" preference="extensions.zotero.sysdict.targetLang" native="true">
+				<menupopup>
+					<menuitem label="自动（跟随系统首选语言第一项）" value="auto"/>
+					<menuitem label="英语" value="en"/>
+					<menuitem label="简体中文" value="zh-Hans"/>
+					<menuitem label="繁体中文" value="zh-Hant"/>
+					<menuitem label="日语" value="ja"/>
+					<menuitem label="韩语" value="ko"/>
+					<menuitem label="西班牙语（需开兜底）" value="es"/>
+					<menuitem label="法语（需开兜底）" value="fr"/>
+					<menuitem label="德语（需开兜底）" value="de"/>
+				</menupopup>
+			</menulist>
+		</hbox>
+		<checkbox id="sysdict-same"
+			label="只在同语言内解释（英对英、中对中，不做翻译）"
+			preference="extensions.zotero.sysdict.sameLanguageOnly"/>
+		<checkbox id="sysdict-fallback"
+			label="允许兜底：查不到时按语境换成首位词典的语言再查；释义语言不对时由端侧模型转写（结果会明确标出）"
+			preference="extensions.zotero.sysdict.fallback"/>
+		<checkbox id="sysdict-context"
+			label="按当前文献语境排序义项"
+			preference="extensions.zotero.sysdict.contextRank"/>
+		<hbox align="center">
+			<label value="排序方式：" control="sysdict-rank-method"/>
+			<menulist id="sysdict-rank-method" preference="extensions.zotero.sysdict.rankMethod" native="true">
+				<menupopup>
+					<menuitem label="候选法：在词典义项里挑选（默认，基准里最准、最快）" value="candidates"/>
+					<menuitem label="整段原文一步生成（实验）" value="onestep"/>
+				</menupopup>
+			</menulist>
+		</hbox>
+		<html:div id="sysdict-now" style="margin-top: 8px; padding: 8px 10px; border-radius: 6px; background: color-mix(in srgb, currentColor 6%, transparent); line-height: 1.6;"/>
+	</groupbox>
+
+	<groupbox>
+		<label><html:h2>检测到的词典</html:h2></label>
+		<html:div id="sysdict-system" style="opacity: .75; margin-bottom: 6px;"/>
+		<html:table id="sysdict-dicts" style="border-collapse: collapse; width: 100%;">
+			<html:thead>
+				<html:tr>
+					<html:th style="text-align: left; padding: 2px 6px 2px 0;">允许</html:th>
+					<html:th style="text-align: left; padding: 2px 8px 2px 0;">词典</html:th>
+					<html:th style="text-align: left; padding: 2px 8px;">查英文词时用</html:th>
+					<html:th style="text-align: left; padding: 2px 8px;">查汉字词时用</html:th>
+				</html:tr>
+			</html:thead>
+			<html:tbody id="sysdict-dicts-body"/>
+		</html:table>
+		<html:div style="opacity: .6; font-size: 11px; margin-top: 4px;">
+			一本都不勾 = 全部允许。勾选后只在勾选的词典里找。
+		</html:div>
+		<hbox align="center" style="margin-top: 6px;">
+			<label value="词典顺序（用 | 分隔，排前面的先试）：" control="sysdict-order"/>
+		</hbox>
+		<html:input id="sysdict-order" type="text" preference="extensions.zotero.sysdict.order" style="width: 100%;"/>
+		<hbox align="center" style="margin-top: 6px;">
+			<button id="sysdict-refresh" label="重新检测" oncommand="SysDictPrefs.refresh()"/>
+			<label id="sysdict-probe-info" style="opacity: .6;"/>
+		</hbox>
+		<html:div style="opacity: .6; font-size: 11px; margin-top: 4px;">
+			语言按探针结果判断（对每本词典试查几个英文词与汉字词，看返回文字），不看词典名。只列出已下载且能查英文或汉字的词典。划词时以那本词典对这个词的实际释义为准。
+		</html:div>
+	</groupbox>
+</vbox>
