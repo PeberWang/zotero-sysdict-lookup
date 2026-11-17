@@ -2,8 +2,10 @@
 
 # Zotero System Dictionary
 
-Select a word in Zotero's reader and the selection popup shows its IPA and two or three
-senses from the macOS dictionaries, with the sense most likely meant in this paper first.
+**The sense that fits this paper.** Select a word in Zotero's reader and macOS Foundation
+Models reads the dictionary entry together with the paper's title, abstract and the words
+you have already looked up, then puts the likeliest sense first: IPA plus two or three
+concise senses in Zotero's own popup.
 
 macOS already shows the full dictionary entry for any word in the reader with Cmd-Ctrl-D
 or a force-click, no plugin needed. If that works for you, you don't need this. The plugin
