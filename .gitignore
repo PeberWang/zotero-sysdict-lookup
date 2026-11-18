@@ -5,3 +5,6 @@ addon/native/*.b64.js
 # OpenClaw 内部任务与交付说明，不入公开仓库
 OPENCLAW_TASK_*.md
 OPENCLAW_HANDOFF.md
+
+# local agent notes (reference a file outside this repository)
+CLAUDE.md
